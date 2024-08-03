@@ -1,0 +1,6 @@
+../Core/Src/w25q.c:12:6:W25Q_WriteEnable	16	static
+../Core/Src/w25q.c:19:9:W25Q_ReadStatusRegister	16	static
+../Core/Src/w25q.c:29:6:W25Q_WaitForWriteEnd	16	static
+../Core/Src/w25q.c:36:6:W25Q_WriteData	32	static
+../Core/Src/w25q.c:46:6:W25Q_ReadData	32	static
+../Core/Src/w25q.c:56:6:W25Q_SectorErase	24	static
