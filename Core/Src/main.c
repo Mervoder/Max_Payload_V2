@@ -342,7 +342,7 @@ int main(void)
 					  pressure = comp_data.pressure;
 					  altitude=BME280_Get_Altitude()-offset_altitude;
 					//  altitude_kalman= KalmanFilter_Update(&kf, altitude);
-					  speed=(altitude-prev_alt)*20;
+					  speed=(altitude-prev_alt)*33.3;
 
 
 					}
@@ -399,7 +399,7 @@ int main(void)
 
 		loratx[69]='\n';
 
-    	HAL_UART_Transmit_IT(&huart3,loratx,LORA_TX_BUFFER_SIZE );
+    	HAL_UART_Transmit(&huart3,loratx,LORA_TX_BUFFER_SIZE , 1000 );
 
          }
 
@@ -730,7 +730,7 @@ static void MX_TIM11_Init(void)
   htim11.Instance = TIM11;
   htim11.Init.Prescaler = 16800;
   htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim11.Init.Period = 64999;
+  htim11.Init.Period = 54999;
   htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim11) != HAL_OK)
