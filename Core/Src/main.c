@@ -39,7 +39,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LORA_TX_BUFFER_SIZE 70
+#define LORA_TX_BUFFER_SIZE 75
 #define RX_BUFFER_SIZE 128
 #define DEVICE_ID 3
 
@@ -397,7 +397,8 @@ int main(void)
 			loratx[i]='0';
 		 }
 
-		loratx[69]='\n';
+		loratx[73]=v4_mod;
+		loratx[74]='\n';
 
     	HAL_UART_Transmit(&huart3,loratx,LORA_TX_BUFFER_SIZE , 1000 );
 
@@ -730,7 +731,7 @@ static void MX_TIM11_Init(void)
   htim11.Instance = TIM11;
   htim11.Init.Prescaler = 16800;
   htim11.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim11.Init.Period = 54999;
+  htim11.Init.Period = 60999;
   htim11.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim11.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim11) != HAL_OK)
@@ -1084,6 +1085,14 @@ void union_converter()
 		 {
 			loratx[i+45]=f2u8_pitch.array[i];
 		 }
+
+		 f2u8_altitude.fVal=altitude_max;
+
+		loratx[69] = f2u8_altitude.array[0];
+		loratx[70] = f2u8_altitude.array[1];
+		loratx[71] = f2u8_altitude.array[2];
+		loratx[72] = f2u8_altitude.array[3];
+
 }
 
 void Altitude_Offset()
