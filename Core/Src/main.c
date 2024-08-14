@@ -288,7 +288,7 @@ int main(void)
 
   lwgps_init(&gps);
   LSM6DSLTR_Init();
-  E220_CONFIG(0x6,0x4A,0X10,1); // 0x10 ch
+  E220_CONFIG(0x6,0x3A,0X10,1); // 0x10 ch
 
 
 
@@ -378,12 +378,11 @@ int main(void)
 
    if(lora_flag==1)
    {
-	   lora_flag=0;
 
 
-		loratx[0]=0x8;
-		loratx[1]=0x2A;
-		loratx[2]=0x10;
+		loratx[0]=0x7;
+		loratx[1]=0x2B;
+		loratx[2]=0x12;
 		loratx[3]=DEVICE_ID;
 		loratx[4]=gps.sats_in_view;
 
@@ -400,7 +399,8 @@ int main(void)
 		loratx[73]=v4_mod;
 		loratx[74]='\n';
 
-    	HAL_UART_Transmit(&huart3,loratx,LORA_TX_BUFFER_SIZE , 1000 );
+    	HAL_UART_Transmit_IT(&huart3,loratx,LORA_TX_BUFFER_SIZE  );
+ 	   lora_flag=0;
 
          }
 
@@ -948,7 +948,7 @@ void E220_CONFIG(uint8_t ADDH, uint8_t ADDL, uint8_t CHN, uint8_t MODE)
     cfg_buff[0] = ADDH;
     cfg_buff[1] = ADDL;
     cfg_buff[2] = 0x62;
-    cfg_buff[3] = 0x00;
+    cfg_buff[3] = 0x40; // 0x00
     cfg_buff[4] = CHN;
 
     switch(mode){
